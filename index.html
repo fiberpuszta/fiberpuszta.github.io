@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiberpuszta — Public Interest Technology & Democratic Futures</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --paper: #f5f0e8;
+    --paper-alt: #ede7db;
+    --accent: #b33a2b;
+    --accent-dark: #8a2a1e;
+    --gold: #c4973b;
+    --gold-muted: #d4b06a;
+    --muted: #6b6560;
+    --light-rule: #d4cfc5;
+    --section-bg: #faf7f2;
+    --tag-bg: #e8e2d6;
+    --tag-text: #5a554e;
+    --eu-blue: #003399;
+    --eu-blue-light: #4466aa;
+    --hu-red: #c8102e;
+    --hu-green: #436f4d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === MASTHEAD === */
+  .masthead {
+    border-bottom: 4px double var(--ink);
+    padding: 2rem 0 1.5rem;
+    text-align: center;
+    position: relative;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+  }
+  .masthead-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .edition-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+  .masthead h1 span {
+    color: var(--accent);
+  }
+  .masthead-subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+  .masthead-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  /* === NAV === */
+  .section-nav {
+    border-bottom: 1px solid var(--light-rule);
+    background: var(--paper-alt);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .section-nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .section-nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    padding: 0.9rem 1.2rem;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .section-nav a:hover,
+  .section-nav a.active {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  /* === LAYOUT === */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* === HERO / LEAD STORY === */
+  .hero-section {
+    padding: 3rem 0 2.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hero-label::before {
+    content: '■';
+    font-size: 0.5rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .hero-deck {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+  .hero-byline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .hero-sidebar {
+    border-left: 1px solid var(--light-rule);
+    padding-left: 2rem;
+  }
+  .sidebar-item {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--light-rule);
+  }
+  .sidebar-item:last-child { border-bottom: none; }
+  .sidebar-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .sidebar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
+  }
+  .sidebar-excerpt {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* === SECTION DIVIDER === */
+  .section-divider {
+    padding: 1.5rem 0 0.5rem;
+    border-bottom: 1px solid var(--light-rule);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .section-divider h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .section-divider .issue-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+  }
+
+  /* === ARTICLE CARDS === */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+  .article-card {
+    border-bottom: 1px solid var(--light-rule);
+    padding-bottom: 1.5rem;
+  }
+  .article-card .card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .article-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+  .article-card .card-deck {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+  }
+  .article-card .card-type {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+  }
+  .card-type.opinion { background: var(--accent); color: white; }
+  .card-type.analysis { background: var(--eu-blue); color: white; }
+  .card-type.research { background: var(--hu-green); color: white; }
+  .card-type.investigation { background: var(--ink); color: var(--paper); }
+
+  /* === FEATURED OPINION (full-width) === */
+  .featured-opinion {
+    padding: 3rem 0;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    margin: 1rem 0;
+  }
+  .fo-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .fo-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+  .fo-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-style: italic;
+    line-height: 1.4;
+    margin-bottom: 1.2rem;
+  }
+  .fo-attribution {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* === TWO-COL LAYOUT === */
+  .two-col {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    padding: 2rem 0;
+  }
+
+  /* === LONG-FORM ARTICLE PREVIEW === */
+  .longform-preview {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--light-rule);
+  }
+  .longform-preview .lf-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .longform-preview h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .longform-preview .lf-deck {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+  }
+  .longform-preview .lf-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* === SIDEBAR COLUMN === */
+  .sidebar-col {
+    border-left: 1px solid var(--light-rule);
+    padding-left: 2rem;
+  }
+  .sidebar-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--light-rule);
+    margin-bottom: 1rem;
+  }
+  .sidebar-brief {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--light-rule);
+  }
+  .sidebar-brief h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
+  }
+  .sidebar-brief p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* === DATA BOX === */
+  .data-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .data-box .db-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    margin-bottom: 0.8rem;
+  }
+  .data-box .db-stat {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 0.3rem;
+  }
+  .data-box .db-context {
+    font-size: 0.8rem;
+    color: #a09a90;
+    line-height: 1.5;
+  }
+
+  /* === FOOTER === */
+  footer {
+    border-top: 4px double var(--ink);
+    padding: 2.5rem 0;
+    margin-top: 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .footer-about h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .footer-about p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--ink); }
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 1.5rem auto 0;
+    padding: 1rem 1.5rem 0;
+    border-top: 1px solid var(--light-rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-sidebar { border-left: none; padding-left: 0; border-top: 1px solid var(--light-rule); padding-top: 1.5rem; }
+    .articles-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .sidebar-col { border-left: none; padding-left: 0; border-top: 1px solid var(--light-rule); padding-top: 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .masthead-meta { gap: 1rem; }
+  }
+
+  /* === LINKS === */
+  .hero-title a:hover, .article-card h3 a:hover, .sidebar-title a:hover, .longform-preview h3 a:hover { text-decoration: underline; }
+  .sidebar-brief h4 a { color: inherit; text-decoration: none; }
+  .sidebar-brief h4 a:hover { text-decoration: underline; }
+
+  /* === ANIMATIONS === */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="edition-line">Vol. I · No. 1 · Inaugural Edition</div>
+    <h1><span>Fiber</span>puszta</h1>
+    <p class="masthead-subtitle">High-bandwidth dreams over legacy infrastructure — Technology, Democracy & Central European Affairs</p>
+    <div class="masthead-meta">
+      <span>Budapest · March 2026</span>
+      <span>Editor-in-Chief: Gergely K.</span>
+      <span>ISSN Pending</span>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION NAV -->
+<nav class="section-nav">
+  <div class="section-nav-inner">
+    <a href="#lead" class="active">Lead Story</a>
+    <a href="#democracy">Democracy & Elections</a>
+    <a href="#tech-society">Tech & Society</a>
+    <a href="#investigation">Investigations</a>
+    <a href="#ideas">Ideas & Theory</a>
+    <a href="#resilience">Resilience</a>
+  </div>
+</nav>
+
+<!-- LEAD STORY -->
+<section class="hero-section" id="lead">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-main fade-up">
+        <div class="hero-label">Lead Story · EU Policy</div>
+        <h1 class="hero-title"><a href="articles/digital-nutrition-label.html" style="color:inherit;text-decoration:none">The Digital Nutrition Label: A Proposal to Make Algorithmic Services Tell You What They're Feeding You</a></h1>
+        <p class="hero-deck">
+          The EU mandates ingredient lists on yogurt, emission stats on cars, and health warnings on cigarettes. 
+          But the algorithmic services shaping the information diet of 450 million Europeans — including children — 
+          have zero mandatory per-user behavioral disclosure. A new civic tech initiative wants to change that 
+          by proposing standardized transparency APIs: a "nutrition label" for your digital attention.
+        </p>
+        <p class="hero-deck">
+          The concept, launched at <strong>digitalnutritionlabel.eu</strong>, positions itself as the logical next step 
+          in the EU's regulatory trajectory from GDPR through the DSA and AI Act to the forthcoming Digital Fairness Act.
+          At its core is a deceptively simple demand: if platforms know how much ad revenue your attention generates, 
+          how many purchase decisions they've influenced, and how your preferences have shifted — tell <em>you</em>.
+        </p>
+        <div class="hero-byline">Gergely K. · Opinion & Policy Proposal · March 2026</div>
+      </div>
+      <div class="hero-sidebar">
+        <div class="sidebar-item fade-up">
+          <div class="sidebar-tag">Democracy</div>
+          <div class="sidebar-title"><a href="articles/election-fraud-scenario.html" style="color:inherit;text-decoration:none">The Nightmare Scenario: Could Hungary's Ruling Party Simply Refuse to Leave?</a></div>
+          <p class="sidebar-excerpt">An analytical framework for the election fraud scenario nobody in polite EU circles wants to discuss — and the structural gaps that make it thinkable.</p>
+        </div>
+        <div class="sidebar-item fade-up">
+          <div class="sidebar-tag">Economics</div>
+          <div class="sidebar-title"><a href="#" style="color:inherit;text-decoration:none">Russia's Economy Is Not What You Think — and That Matters for European Security</a></div>
+          <p class="sidebar-excerpt">Nominal GDP says 12:1 advantage for the US. Purchasing power parity tells a very different story — and it's the one that matters for military spending.</p>
+        </div>
+        <div class="sidebar-item fade-up">
+          <div class="sidebar-tag">Technology</div>
+          <div class="sidebar-title"><a href="articles/ai-inequality-global-north.html" style="color:inherit;text-decoration:none">The Memory Squeeze: Why AI Is Making Your Next Computer More Expensive</a></div>
+          <p class="sidebar-excerpt">Micron exits consumer RAM. HBM eats wafer capacity. The AI boom's collateral damage hits ordinary hardware buyers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED OPINION PULL QUOTE -->
+<section class="featured-opinion fade-up">
+  <div class="container">
+    <div class="fo-inner">
+      <div class="fo-label">Editor's Column</div>
+      <p class="fo-quote">
+        "Politics is no longer about evaluating politicians based on their plans and achievements. 
+        It follows a completely different dynamic now — one driven by emotion, fear, belonging, even entertainment. 
+        The news itself has become about finding the narrative that best fits one's echo chamber — 
+        anything that protects people from the complexity of the world and the hard work of critical thinking."
+      </p>
+      <div class="fo-attribution">Gergely K. · From "Beyond Rational Evaluation"</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMOCRACY & ELECTIONS -->
+<div class="container">
+  <div class="section-divider" id="democracy">
+    <h2>Democracy & Elections</h2>
+    <span class="issue-num">Section II</span>
+  </div>
+  <div class="articles-grid">
+    <div class="article-card fade-up">
+      <div class="card-tag">Hungarian Elections 2026</div>
+      <h3><a href="articles/election-fraud-scenario.html" style="color:inherit;text-decoration:none">The Election Fraud Scenario: An Honest Risk Assessment</a></h3>
+      <p class="card-deck">
+        If Fidesz sees bad numbers at 30% counted, what stops them from deploying the "under attack" narrative 
+        and committing obvious fraud? The infrastructure is in place — captured courts, purged military, controlled IT. 
+        But the scenario has five critical weaknesses the pessimists are underweighting, starting with the oligarch class's 
+        existential dependence on EU market access.
+      </p>
+      <span class="card-type opinion">Opinion</span>
+    </div>
+    <div class="article-card fade-up">
+      <div class="card-tag">EU Institutional Limits</div>
+      <h3><a href="#" style="color:inherit;text-decoration:none">Is Election Integrity an EU Problem — or a NATO One?</a></h3>
+      <p class="card-deck">
+        A question prepared for a Central European election integrity conference: when a member state faces 
+        state-level foreign influence operations, the EU's domestic-politics framing hits a wall. 
+        The Romania 2024 precedent suggests a security dimension that existing frameworks can't address.
+      </p>
+      <span class="card-type analysis">Analysis</span>
+    </div>
+    <div class="article-card fade-up">
+      <div class="card-tag">Democratic Innovation</div>
+      <h3><a href="#" style="color:inherit;text-decoration:none">Sortition: What If We Chose Politicians Like Jurors?</a></h3>
+      <p class="card-deck">
+        The Sortition Foundation has supported over 100 citizens' assemblies worldwide — from the UK Climate Assembly 
+        to Scotland and Belgium. Their open-source tools for democratic lottery selection are now a candidate 
+        for UN Digital Public Good recognition. Inside the infrastructure of post-partisan democracy.
+      </p>
+      <span class="card-type research">Research</span>
+    </div>
+  </div>
+</div>
+
+<!-- TECH & SOCIETY -->
+<div class="container">
+  <div class="section-divider" id="tech-society">
+    <h2>Technology & Society</h2>
+    <span class="issue-num">Section III</span>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="longform-preview fade-up">
+        <div class="lf-tag">AI & Labor</div>
+        <h3><a href="articles/ai-inequality-global-north.html" style="color:inherit;text-decoration:none">AI Will Boost Productivity in the Global North — and Make Inequality Worse Everywhere Else</a></h3>
+        <p class="lf-deck">
+          The robot doctors in rural Hungary example is spot on. AI deployment requires capital that concentrates 
+          in the Global North, making differences between and within societies even bigger. The only exception 
+          may be software development, which is location-agnostic — but coding itself is about to become a 
+          basic digital competence like Word or Excel. The developer as a profession is ending; 
+          solving problems across domains will remain human work.
+        </p>
+        <div class="lf-meta">Opinion · 4 min read</div>
+      </div>
+
+      <div class="longform-preview fade-up">
+        <div class="lf-tag">Philosophy of Technology</div>
+        <h3><a href="#" style="color:inherit;text-decoration:none">We're Losing the Abilities That Made Us Human</a></h3>
+        <p class="lf-deck">
+          Evolution's greatest hits: solid body structure, locomotion, cognition. 
+          We built cars to move, buildings to rise, LLMs to think — and in the process, 
+          we're atrophying the fundamental capacities they augment. The risk isn't the tools. 
+          It's when infrastructure makes it impossible to choose the underlying ability, even when we'd want to.
+        </p>
+        <div class="lf-meta">Essay · 6 min read</div>
+      </div>
+
+      <div class="longform-preview fade-up">
+        <div class="lf-tag">Political Economy</div>
+        <h3><a href="articles/techno-feudalism-digital-serfs.html" style="color:inherit;text-decoration:none">The New Feudalism: Are We Becoming Digital Serfs?</a></h3>
+        <p class="lf-deck">
+          Goods and power were concentrated in the 17th–18th centuries, then decentralized, 
+          and are now reconcentrating around energy, compute, and materials. 
+          Varoufakis calls it techno-feudalism. The Hungarian <em>zsellér</em> (landless peasant) 
+          may be the best historical analogy for a future digitally dependent population. 
+          A critical examination of the reconcentration thesis — and where it falls short.
+        </p>
+        <div class="lf-meta">Analysis · 8 min read</div>
+      </div>
+
+      <div class="longform-preview fade-up">
+        <div class="lf-tag">Economics</div>
+        <h3><a href="#" style="color:inherit;text-decoration:none">The Memory Squeeze: Micron Exits Consumer RAM, AI Eats the Supply Chain</a></h3>
+        <p class="lf-deck">
+          Micron's Crucial brand is gone. HBM production for AI consumes 3x the wafer capacity of DDR5. 
+          Consumer DRAM prices are rising and the industry expects tight conditions beyond 2026.
+          Not a doomsday scenario — but a concrete, measurable way the AI boom hits ordinary hardware buyers.
+        </p>
+        <div class="lf-meta">Research · 5 min read</div>
+      </div>
+    </div>
+
+    <div class="sidebar-col">
+      <div class="sidebar-section-title">Data Points</div>
+
+      <div class="data-box">
+        <div class="db-label">GDP Comparison</div>
+        <div class="db-stat">12:1 → 4.5:1</div>
+        <p class="db-context">US vs. Russia GDP ratio drops from 12:1 (nominal) to ~4.5:1 at purchasing power parity. Russia ranks 4th globally by PPP — the metric that matters for military expenditure.</p>
+      </div>
+
+      <div class="data-box" style="background: var(--accent-dark);">
+        <div class="db-label">Hungary's Frozen EU Funds</div>
+        <div class="db-stat">€19-22B</div>
+        <p class="db-context">EU cohesion and recovery funds frozen due to rule-of-law conditions. The expectation of eventually accessing this money is what keeps Orbán's oligarch network invested in EU membership.</p>
+      </div>
+
+      <div class="sidebar-brief">
+        <h4>Mac Mini as Local LLM Server</h4>
+        <p>The M4 Pro with 48GB unified memory can run Devstral-24B and Qwen3-Coder:32B locally. At €1,999 + €3/month electricity, it's the sweet spot for a privacy-preserving AI coding setup. Buy before RAM prices climb further.</p>
+      </div>
+
+      <div class="sidebar-brief">
+        <h4>Hungarian Post-1989 Economic Policy: A Sequence of Errors</h4>
+        <p>Antall maintained unsustainable structures. Bokros imposed austerity. Medgyessy overspent. Gyurcsány distributed quietly. Orbán had 2/3 majority and EU funds — and chose utility subsidies and baby bonds over structural reform.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INVESTIGATIONS -->
+<div class="container">
+  <div class="section-divider" id="investigation">
+    <h2>Investigations & Due Diligence</h2>
+    <span class="issue-num">Section IV</span>
+  </div>
+  <div class="articles-grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="article-card fade-up">
+      <div class="card-tag">Civic Due Diligence</div>
+      <h3><a href="articles/panzerhaus-investigation.html" style="color:inherit;text-decoration:none">PanzerHaus: The "Crisis Management Program" Linked to Lunar Diamond Mining Claims</a></h3>
+      <p class="card-deck">
+        A Czech-registered company offers individualized crisis and security planning with a multi-year onboarding process 
+        and opaque pricing. Zero independent reviews exist. Its affiliate, Tri Super State, claims GDP figures 
+        hundreds of times larger than the US economy — from lunar diamond mining. A cautionary tale in due diligence.
+      </p>
+      <span class="card-type investigation">Investigation</span>
+    </div>
+    <div class="article-card fade-up">
+      <div class="card-tag">Ukraine · Anti-Corruption</div>
+      <h3><a href="articles/resistance-ngo-ukraine.html" style="color:inherit;text-decoration:none">When Real Corruption Meets Geopolitical Narrative: The RESISTANCE NGO Case</a></h3>
+      <p class="card-deck">
+        Maria Barabash's NGO exposed real Ukrainian wartime procurement scandals — tenders were actually cancelled. 
+        But her pro-Trump positioning, amplification by Russian-aligned media, and anti-Zelenskyy rhetoric 
+        raise a harder question: can genuine anti-corruption work simultaneously serve foreign interests? 
+        The most effective influence operations weaponize real information — and the useful idiot model 
+        is far more common than the paid agent model.
+      </p>
+      <span class="card-type investigation">Investigation</span>
+    </div>
+  </div>
+</div>
+
+<!-- IDEAS & THEORY -->
+<div class="container">
+  <div class="section-divider" id="ideas">
+    <h2>Ideas & Theory</h2>
+    <span class="issue-num">Section V</span>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="longform-preview fade-up">
+        <div class="lf-tag">Sociology</div>
+        <h3><a href="articles/nuclear-family-gdp.html" style="color:inherit;text-decoration:none">The Nuclear Family as GDP Generator: A Theory of Structural Dependency</a></h3>
+        <p class="lf-deck">
+          A provocative thesis: the nuclear family structure doesn't just correlate with high GDP — it 
+          <em>generates the need</em> for it. Without extended kin networks, every function (childcare, eldercare, 
+          emotional support, crisis response) must be purchased on the market. Connecting Illich, Chayanov, 
+          Polanyi, and Fei Xiaotong to argue that what we measure as prosperity 
+          is partly the cost of replacing what communities once provided for free.
+        </p>
+        <div class="lf-meta">Essay · 10 min read</div>
+      </div>
+
+      <div class="longform-preview fade-up">
+        <div class="lf-tag">Geography & Cybernetics</div>
+        <h3><a href="#" style="color:inherit;text-decoration:none">Society After Territory: When Feedback Loops Cross Borders</a></h3>
+        <p class="lf-deck">
+          Society was once defined by location. The internet didn't dissolve that — but changed the topology. 
+          We now live in multi-scalar social space: locally instantiated, globally informed. 
+          The cybernetic challenge is that national governments operate on territorial principles 
+          while populations organize around non-territorial networks. A systems-theory view of the transition.
+        </p>
+        <div class="lf-meta">Essay · 7 min read</div>
+      </div>
+
+      <div class="longform-preview fade-up">
+        <div class="lf-tag">Depth Psychology</div>
+        <h3><a href="#" style="color:inherit;text-decoration:none">Boundaries as Infrastructure for Collective Life</a></h3>
+        <p class="lf-deck">
+          What if the Western therapeutic model of boundaries as self-protection is the wrong frame entirely? 
+          An adaptive exploration across six waves — from schema theory through Hungarian feudalism, 
+          Kádár-era state paternalism, and Catholic monasticism — arrives at a surprising reframe: 
+          boundaries not as walls for the self, but as fences that make the commons function.
+        </p>
+        <div class="lf-meta">Series · Part 6 of ongoing project</div>
+      </div>
+    </div>
+
+    <div class="sidebar-col">
+      <div class="sidebar-section-title">Reading List</div>
+      <div class="sidebar-brief">
+        <h4>Varoufakis — Technofeudalism</h4>
+        <p>The reconcentration thesis, formalized. Cloud capital as the new landlordism.</p>
+      </div>
+      <div class="sidebar-brief">
+        <h4>Acemoglu & Johnson — Power and Progress</h4>
+        <p>Technology doesn't automatically create shared prosperity. It depends on who controls the direction.</p>
+      </div>
+      <div class="sidebar-brief">
+        <h4>Polanyi — The Great Transformation</h4>
+        <p>Hungarian-born economist on self-regulating markets destroying the social fabric. More relevant than ever.</p>
+      </div>
+      <div class="sidebar-brief">
+        <h4>Fei Xiaotong — From the Soil</h4>
+        <p>1947 analysis of Chinese rural social structure. Anticipated the cooperative village-based economy argument by decades.</p>
+      </div>
+      <div class="sidebar-brief">
+        <h4>Hrdy — Mothers and Others</h4>
+        <p>The cooperative breeding argument against the nuclear family as natural unit.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESILIENCE -->
+<div class="container">
+  <div class="section-divider" id="resilience">
+    <h2>Resilience & Preparedness</h2>
+    <span class="issue-num">Section VI</span>
+  </div>
+  <div class="articles-grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="article-card fade-up">
+      <div class="card-tag">Communications</div>
+      <h3><a href="articles/communication-resilience.html" style="color:inherit;text-decoration:none">Beyond Starlink: Building Communication Resilience When Infrastructure Can't Be Trusted</a></h3>
+      <p class="card-deck">
+        A practical assessment of off-grid and censorship-resistant communication options: 
+        amateur radio digital modes (Winlink, JS8Call), Meshtastic mesh networking on 868 MHz ISM band, 
+        and Briar for encrypted phone-to-phone messaging. Hardware recommendations, Budapest-specific considerations, 
+        and a combined setup for under €1,500 that covers local coordination and international reach.
+      </p>
+      <span class="card-type research">Research</span>
+    </div>
+    <div class="article-card fade-up">
+      <div class="card-tag">Hardware Strategy</div>
+      <h3><a href="#" style="color:inherit;text-decoration:none">Buy RAM Now: A Practical Guide to Hardware Resilience in the AI Era</a></h3>
+      <p class="card-deck">
+        DRAM prices surging. HBM consuming wafer capacity. Consumer relief not expected until ~2028. 
+        The case for treating a 48GB+ Mac Mini as both a local AI server and an investment 
+        in hardware access before the window closes further.
+      </p>
+      <span class="card-type opinion">Opinion</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <h3>About Fiberpuszta</h3>
+      <p>
+        High-bandwidth dreams over legacy infrastructure. An independent publication at the intersection 
+        of public interest technology, democratic innovation, and Central European affairs. 
+        Written from Budapest by a civic technologist who builds democratic infrastructure 
+        for international organizations while studying how societies actually work. 
+        All opinions are the editor's. All research is cited.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Sections</h4>
+      <a href="#">Democracy & Elections</a>
+      <a href="#">Technology & Society</a>
+      <a href="#">Investigations</a>
+      <a href="#">Ideas & Theory</a>
+      <a href="#">Resilience</a>
+    </div>
+    <div class="footer-col">
+      <h4>Elsewhere</h4>
+      <a href="#">digitalnutritionlabel.eu</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">FernUniversität Hagen</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Fiberpuszta · Budapest, Hungary · High-bandwidth dreams, legacy infrastructure
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Smooth scroll for nav
+document.querySelectorAll('.section-nav a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.section-nav a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+});
+
+// Update active nav on scroll
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.section-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
