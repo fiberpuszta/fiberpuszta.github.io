@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Will Boost Productivity in the Global North — and Make Inequality Worse Everywhere Else — Fiberpuszta</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html" class="topbar-brand"><span>Fiber</span>puszta</a>
+  <a href="../index.html" class="topbar-back">← All articles</a>
+</div>
+
+<header class="article-header">
+  <div class="article-meta-top">
+    <span class="article-tag tag-opinion">Opinion</span>
+    <span class="tag-section">Technology & Society · AI & Labor</span>
+  </div>
+  <h1>AI Will Boost Productivity in the Global North — and Make Inequality Worse Everywhere Else</h1>
+  <p class="article-deck">Robot doctors won't be running the show in rural Hungary anytime soon. AI deployment requires capital that concentrates in the Global North. The developer as a profession is ending — but solving problems across domains will remain human work.</p>
+  <div class="article-byline">
+    <div class="byline-avatar">GK</div>
+    <div class="byline-info">
+      <div class="byline-name">Gergely K.</div>
+      <div class="byline-date">March 2026 · 4 min read</div>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+
+  <p>The robot doctors in rural Hungary example is spot on. This predicts one thing: AI will boost productivity further in the Global North, where they have enough money to deploy it, making the differences between and within societies even bigger. Practically, that's it.</p>
+  <p>The only exception is maybe software development, which is more location-agnostic and can be done remotely. As a software developer, I think the coding part itself will soon become a digital competence very similar to Word or Excel — something that is a must whatever job you have. So yes, the developer as a profession is over soon, but solving problems across various domains will stay with us and requires human interaction.</p>
+
+  <div class="pull-quote">"Job of the future: Professional with a social worker background who can write mobile applications and perform data analytics with AI to support a robot doctor service launch in rural Hungary."</div>
+
+  <h2>The Structural Point</h2>
+  <p>AI deployment is a capital-intensive activity. Training large models costs hundreds of millions. Deploying inference infrastructure costs millions. Even using API services requires reliable internet, electricity, and organizations with budgets for software tooling. Every one of these requirements correlates with existing wealth.</p>
+  <p>This means AI follows the same pattern as every previous wave of productive technology: it amplifies existing advantages. Countries, regions, and companies that are already productive become more productive. Those that aren't fall further behind — not because they're doing anything wrong, but because the gap in capability widens automatically.</p>
+
+  <h2>The Paradigm Shift Nobody Wants to Discuss</h2>
+  <p>And the hardest paradigm shift is how we value work on a societal level. Maybe work won't be the main role of humans in society anymore. We could pay people for other things: for learning, for keeping themselves healthy (to reduce healthcare system load), for doing useful social activities, for writing blogs. And the robots do the factory work, which fits them better anyway.</p>
+  <p>This isn't utopian dreaming — it's a practical question about social contracts. If AI generates enough surplus to sustain a society, the distribution question becomes political rather than economic. Who decides who gets what? The answer to that question determines whether AI becomes the great equalizer or the great concentrator.</p>
+
+</article>
+
+<div class="origin-note">
+  <strong>How this article was made:</strong> Written as a LinkedIn comment responding to a veterinarian-turned-tech-person's observation about AI adoption timelines in non-metropolitan areas. Polished for grammar and clarity while preserving the original voice and argument structure.
+</div>
+
+<div class="engage-section">
+  <div class="engage-divider"><h2>Your Turn</h2></div>
+  <div class="resonance-q">
+      <h3>Where are you experiencing AI adoption?</h3>
+      <div class="resonance-options" data-question="location"><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Major Western city — AI is everywhere in my industry</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Smaller European city — adoption is slow but growing</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Global South — the gap the author describes is real</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Rural area — this article describes my reality</span></div></div>
+      
+    </div>
+  <div class="submit-responses">
+    <button class="btn-submit-responses" onclick="submitResponses()">Submit My Responses</button>
+    <p class="submit-note">Responses are anonymous and help shape future coverage</p>
+  </div>
+</div>
+
+<div class="chat-section">
+  <div class="engage-divider"><h2>Discuss This Topic with AI</h2></div>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-ai-dot"></div>
+        <h3>Fiberpuszta Discussion Partner</h3>
+      </div>
+      <div class="chat-budget" id="budget-display">5 free messages remaining</div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-msg system">
+        Ask questions, challenge the argument, or explore angles the article didn't cover.
+        5 free messages — then bring your own Anthropic API key.
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <textarea id="chat-input" placeholder="Challenge the argument, ask for evidence, explore a different angle..."></textarea>
+      <button class="btn-send" id="btn-send" onclick="sendMessage()">Send</button>
+    </div>
+    <div class="byok-section" id="byok-section">
+      <p><strong>Free messages used up.</strong> Enter your Anthropic API key to continue. Stored only in your browser.</p>
+      <div class="byok-row">
+        <input type="password" placeholder="sk-ant-api03-..." id="byok-input">
+        <button class="btn-byok" onclick="activateBYOK()">Unlock</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="article-footer">
+  <p>© 2026 Fiberpuszta · Budapest · High-bandwidth dreams, legacy infrastructure</p>
+</div>
+
+<script>
+window.ARTICLE_CONTEXT = "You are a discussion partner on Fiberpuszta. The reader has read a short opinion piece arguing that AI will boost productivity primarily in the Global North where capital exists to deploy it, widening gaps between and within societies. The author argues coding will become a basic competence like Word/Excel, ending 'developer' as a standalone profession, but human problem-solving across domains will persist. Challenge: is this too pessimistic about the Global South? What about open-source AI? Mobile-first leapfrogging? Be direct.";
+</script>
+<script src="../chat.js"></script>
+</body>
+</html>

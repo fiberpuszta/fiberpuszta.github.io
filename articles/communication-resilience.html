@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond Starlink: Building Communication Resilience When Infrastructure Can't Be Trusted — Fiberpuszta</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../index.html" class="topbar-brand"><span>Fiber</span>puszta</a>
+  <a href="../index.html" class="topbar-back">← All articles</a>
+</div>
+
+<header class="article-header">
+  <div class="article-meta-top">
+    <span class="article-tag tag-research">Research</span>
+    <span class="tag-section">Resilience & Preparedness · Communications</span>
+  </div>
+  <h1>Beyond Starlink: Building Communication Resilience When Infrastructure Can't Be Trusted</h1>
+  <p class="article-deck">A practical assessment of off-grid communication options: amateur radio, mesh networking, encrypted messaging. Hardware recommendations, Budapest-specific considerations, and a combined setup for under €1,500.</p>
+  <div class="article-byline">
+    <div class="byline-avatar">GK</div>
+    <div class="byline-info">
+      <div class="byline-name">Gergely K.</div>
+      <div class="byline-date">March 2026 · 9 min read</div>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+
+  <h2>The Problem</h2>
+  <p>The internet is centralized infrastructure. It can be shut down, throttled, or surveilled by any government that controls the physical layer — the cables, the ISPs, the DNS servers. This has happened in Myanmar, Iran, Sudan, Russia, Ethiopia, and many other countries. The question for anyone living in a democracy that may be backsliding is not whether it <em>could</em> happen, but what alternatives exist if it does.</p>
+  <p>Starlink is the obvious first answer, but it has limitations: it requires a visible terminal, it's controlled by a single company with its own political relationships, and it can be jammed or geo-blocked. A serious resilience strategy needs layers beyond satellite internet.</p>
+
+  <h2>Layer 1: Amateur Radio — International Reach</h2>
+  <p>Amateur (ham) radio is the only communication technology that is both independent of commercial infrastructure and capable of international reach. With an HF (high-frequency) radio and a wire antenna, you can communicate with people hundreds or thousands of kilometers away — bouncing signals off the ionosphere with no infrastructure in between.</p>
+  <p>The key digital modes for crisis communication: <strong>Winlink</strong> provides email over radio — you compose messages offline and they're transmitted through a network of volunteer gateways. <strong>JS8Call</strong> enables keyboard-to-keyboard chat with store-and-forward capability. <strong>VarAC</strong> offers a more modern chat interface over radio.</p>
+  <p>Hardware: The <strong>Xiegu X6100</strong> (~€600) or <strong>ICOM IC-705</strong> (~€1,200) are portable HF transceivers that can operate off battery power. Add a <strong>Digirig</strong> audio interface (~€50) to connect to a laptop, and a NVIS wire antenna for regional coverage reaching neighboring countries' gateways.</p>
+  <p>In Hungary, the licensing body is NMHH. The Budapest amateur radio club HA5KDR is a practical starting point.</p>
+
+  <h2>Layer 2: Mesh Networking — City-Scale Coordination</h2>
+  <p><strong>Meshtastic</strong> turns cheap LoRa radio modules into a mesh network that passes messages between nodes automatically. On the EU 868 MHz ISM band, no license is required. Devices range from the Heltec V3 (~€18) to the LILYGO T-Deck (~€50) to the Spectre Pro for better range. Realistic urban range: 1–3 km per hop, but messages relay through intermediate nodes.</p>
+  <p>The practical requirement: you need a <em>network</em> of people, not just a device. Distribute Meshtastic nodes among trusted contacts — family, neighbors, civic groups — and establish them <em>before</em> a crisis. A mesh network you set up during an emergency is too late.</p>
+
+  <h2>Layer 3: Phone-to-Phone — Encrypted Last Resort</h2>
+  <p><strong>Briar</strong> is an Android app that sends encrypted messages directly between phones via Bluetooth or Wi-Fi, with no internet required. Range is limited — essentially room or building scale — but it provides encrypted communication when absolutely everything else is down. Pre-install it on all devices in your trust network.</p>
+
+  <div class="data-callout"><div class="dc-label">Combined Budget</div><div class="dc-stat">< €1,500</div><div class="dc-context">HF radio + audio interface (~€650), 5× Meshtastic nodes (~€90), LiFePO4 battery + small solar panel (~€150), remaining for cables, antennas, and contingency. Briar is free.</div></div>
+
+</article>
+
+<div class="origin-note">
+  <strong>How this article was made:</strong> This article was developed through a practical research session exploring alternatives to centralized internet infrastructure, with specific hardware recommendations verified through current pricing and availability. The discussion was framed around crisis scenarios rather than everyday use.
+</div>
+
+<div class="engage-section">
+  <div class="engage-divider"><h2>Your Turn</h2></div>
+  <div class="resonance-q">
+      <h3>Why are you interested in communication resilience?</h3>
+      <div class="resonance-options" data-question="context"><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>I live in a country where infrastructure shutdowns have happened</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>General preparedness — I want to be ready for anything</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Professional interest — I work in security or emergency management</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Curiosity — I hadn't thought about this before</span></div></div>
+      
+    </div>
+  <div class="resonance-q">
+      <h3>What's your biggest barrier to implementing this?</h3>
+      <div class="resonance-options" data-question="barrier"><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Cost — even €1,500 is significant</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Complexity — I don't know how to use radio equipment</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Social — I'd need others in my network to participate</span></div><div class="resonance-opt" onclick="selectOption(this)"><div class="dot"></div><span>Legal — amateur radio licensing seems like a hurdle</span></div></div>
+      <div class="resonance-freetext"><textarea placeholder="Want to say more? (optional)"></textarea></div>
+    </div>
+  <div class="submit-responses">
+    <button class="btn-submit-responses" onclick="submitResponses()">Submit My Responses</button>
+    <p class="submit-note">Responses are anonymous and help shape future coverage</p>
+  </div>
+</div>
+
+<div class="chat-section">
+  <div class="engage-divider"><h2>Discuss This Topic with AI</h2></div>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-ai-dot"></div>
+        <h3>Fiberpuszta Discussion Partner</h3>
+      </div>
+      <div class="chat-budget" id="budget-display">5 free messages remaining</div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="chat-msg system">
+        Ask questions, challenge the argument, or explore angles the article didn't cover.
+        5 free messages — then bring your own Anthropic API key.
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <textarea id="chat-input" placeholder="Challenge the argument, ask for evidence, explore a different angle..."></textarea>
+      <button class="btn-send" id="btn-send" onclick="sendMessage()">Send</button>
+    </div>
+    <div class="byok-section" id="byok-section">
+      <p><strong>Free messages used up.</strong> Enter your Anthropic API key to continue. Stored only in your browser.</p>
+      <div class="byok-row">
+        <input type="password" placeholder="sk-ant-api03-..." id="byok-input">
+        <button class="btn-byok" onclick="activateBYOK()">Unlock</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="article-footer">
+  <p>© 2026 Fiberpuszta · Budapest · High-bandwidth dreams, legacy infrastructure</p>
+</div>
+
+<script>
+window.ARTICLE_CONTEXT = "You are a discussion partner on Fiberpuszta. The reader has read a practical guide to off-grid communication: amateur radio (Winlink, JS8Call, VarAC), Meshtastic mesh networking (868 MHz ISM), and Briar encrypted messaging. The article recommends a layered approach: ham radio for international reach, Meshtastic for city-scale coordination, Briar for phone-to-phone. Budget under \u20ac1,500. Discuss practical questions: licensing requirements, realistic range expectations, social aspects (you need a network of people, not just hardware). Be direct.";
+</script>
+<script src="../chat.js"></script>
+</body>
+</html>
